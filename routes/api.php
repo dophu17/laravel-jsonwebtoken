@@ -14,12 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-  echo 'api/user';die;
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth.jwt'], function () {
-    Route::get('/flightsToken', 'FlightController@indexAPI');
+Route::post('auth/login', 'UserController@login');
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('user-info', 'UserController@getUserInfo');
 });
-
-Route::get('/flights', 'FlightController@indexAPI');
