@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('auth/login', 'UserController@login');
-Route::group(['middleware' => 'jwt.auth'], function () {
+Route::post('user/login', 'API\UserController@login');
+Route::group(['middleware' => 'jwt.auth', 'namespace' => 'API'], function () {
     Route::get('user-info', 'UserController@getUserInfo');
 });
